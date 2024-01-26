@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import model.Country;
+import model.EastAsiaCountries;
 import view.Validation;
 
 public class Controller {
@@ -18,14 +19,14 @@ public class Controller {
         double area = val.getDouble("Enter total area: ");
         String terrain = val.getString("Enter terrain of country: ");
         
-        Country newCt = new Country(id, name, area, terrain);
+        Country newCt = new EastAsiaCountries(id, name, area, terrain);
         ctList.add(newCt);
     }
     
     public void autoCreateCountry(){
-        Country vn = new Country("VN", "Vietnam", 331698.0, "Nice");
-        Country us = new Country("US", "USA", 831579.0, "Nice");
-        Country cn = new Country("CN", "China", 461875.0, "Bad");
+        Country vn = new EastAsiaCountries("VN", "Vietnam", 331698.0, "Nice");
+        Country us = new EastAsiaCountries("US", "USA", 831579.0, "Nice");
+        Country cn = new EastAsiaCountries("CN", "China", 461875.0, "Bad");
         
         ctList.add(vn);
         ctList.add(us);
@@ -36,8 +37,11 @@ public class Controller {
     
     public void displayCountry(ArrayList<Country> list) {
         System.out.println("ID      | Name          | Total Area      | Terrain");
+        
         for (Country ct : list) {
-            System.out.printf("%-8s| %-14s| %-16.1f| %s\n", ct.getCountryCode(), ct.getCountryName(), ct.getTotalArea(), ct.getTerrain());
+            if(ct instanceof EastAsiaCountries) {
+                System.out.printf("%-8s| %-14s| %-16.1f| %s\n", ct.getCountryCode(), ct.getCountryName(), ct.getTotalArea(), ((EastAsiaCountries) ct).getCountryTerrain());
+            }
         }
     }
 
